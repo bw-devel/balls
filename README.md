@@ -25,6 +25,7 @@ Text
 ### Reference ###
 
 * [Wikipedia - Pachinko](https://en.wikipedia.org/wiki/Pachinko)
+* [Steam Store - Pincremental](https://store.steampowered.com/app/1369470/Pincremental/)
 
 
 ### Resources ###
