@@ -1,17 +1,17 @@
-# balls
+# **Balls**
 
 An attempt at an idle/incremental game based on Pachinko...
 
----------------------------------
+---
 
-### Concept ###
+## Concept
 
 Using Pincremental as an base concept, have an incremental/idle game that
 builds off of auto-playing Pachinko game that can potentially split of to
 multiple tables?
 
 
-### Controls ###
+## Controls
 
 | Control     | Effect                    |
 |:-----------:|:-------------------------:|
@@ -21,13 +21,13 @@ multiple tables?
 | r           | reset objects             |
 
 
-### Reference ###
+## Reference
 
 * [Wikipedia - Pachinko](https://en.wikipedia.org/wiki/Pachinko)
 * [Steam Store - Pincremental](https://store.steampowered.com/app/1369470/Pincremental/)
 
 
-### Resources ###
+## Resources
 
 * Box2D
   * [Love2D Wiki - Physics Tutorial](https://love2d.org/wiki/Tutorial:Physics)

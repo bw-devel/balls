@@ -20,8 +20,9 @@ function love.load()
 
 	--[[ Physics: Tutorial https://love2d.org/wiki/Tutorial:Physics]]
 
-	pinRows = 4
+	pinRows = 7
 	pinCols = 7
+	pinRad = 20
 	world, objects = tut_init()
 end
 

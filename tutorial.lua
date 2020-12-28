@@ -12,7 +12,21 @@ function tut_init()
   objects.ground.fixture = love.physics.newFixture(objects.ground.body,
     objects.ground.shape)
 
-  -- create a ball
+  -- create a Balls
+  objects.balls = {}
+
+  for x = 1, 5, 1 do
+    local ball = {}
+    local x = love.math.random(WIDTH / 2) + WIDTH / 4
+    ball.body = love.physics.newBody(world, x, 5, 'dynamic')
+    ball.shape = love.physics.newCircleShape(20)
+    ball.fixture = love.physics.newFixture(ball.body, ball.shape, 1)
+    ball.fixture:setRestitution(0.5)
+    table.insert(objects.balls, ball)
+  end
+
+  ---old static ball
+  --[[
   objects.ball = {}
   objects.ball.body = love.physics.newBody(world, WIDTH / 2 + 1, 50,
     "dynamic")
@@ -20,7 +34,7 @@ function tut_init()
   objects.ball.fixture = love.physics.newFixture(objects.ball.body,
     objects.ball.shape, 1)
   objects.ball.fixture:setRestitution(0.9)
-
+  ]]
   --- create 2 blocks
   --[[
   objects.block1 = {}
@@ -52,12 +66,12 @@ function tut_init()
   -- the math needs to be fixed here, buggy method to do offsets
   for x = 1, pinCols, 1 do
     for y = 1, pinRows, 1 do
-      local ox = y % 2 * WIDTH / 12
+      local ox = y % 2 * WIDTH / (pinCols)
       local pin = {}
       if x == pinCols and y % 2 == 1 then goto continue end
-      pin.body = love.physics.newBody(world, (WIDTH / (pinCols + 1)) * x + ox,
+      pin.body = love.physics.newBody(world, (WIDTH / (pinCols + 1)) * x + ox /2,
       HEIGHT - (HEIGHT / (pinRows + 1)) * y)
-      pin.shape = love.physics.newCircleShape(20)
+      pin.shape = love.physics.newCircleShape(pinRad)
       pin.fixture = love.physics.newFixture(pin.body, pin.shape)
       table.insert(objects.pins, pin)
       ::continue::
@@ -89,9 +103,9 @@ function tut_draw()
     objects.ground.body:getWorldPoints(objects.ground.shape:getPoints()))
 
   lgsetcol(0.76, 0.18, 0.05)
-  love.graphics.circle("fill",objects.ball.body:getX(),
-    objects.ball.body:getY(), objects.ball.shape:getRadius())
-
+  for k, v in pairs(objects.balls) do
+    love.graphics.circle("fill", v.body:getX(), v.body:getY(), v.shape:getRadius())
+  end
 --[[
   lgsetcol(0.20, 0.20, 0.20)
   love.graphics.polygon("fill", objects.block1.body:getWorldPoints(
