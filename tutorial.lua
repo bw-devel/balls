@@ -5,12 +5,21 @@ function tut_init()
   -- table to hold our physical objects
   local objects = {}
 
-  -- create the ground
-  objects.ground = {}
-  objects.ground.body = love.physics.newBody(world, WIDTH / 2, HEIGHT - 50 / 2)
-  objects.ground.shape = love.physics.newRectangleShape(WIDTH, 50)
-  objects.ground.fixture = love.physics.newFixture(objects.ground.body,
-    objects.ground.shape)
+  -- create walls
+  objects.walls = {}
+  local walldims = {
+    {x = 10,          y = HEIGHT / 2,   w = 20,     h = HEIGHT},
+    {x = WIDTH - 10,  y = HEIGHT / 2,   w = 20,     h = HEIGHT},
+    {x = WIDTH / 2,   y = HEIGHT - 10,  w = WIDTH,  h = 20}
+  }
+
+  for i = 1, #walldims, 1 do
+    local wall = {}
+    wall.body = love.physics.newBody(world, walldims[i].x, walldims[i].y)
+    wall.shape = love.physics.newRectangleShape(walldims[i].w, walldims[i].h)
+    wall.fixture = love.physics.newFixture(wall.body, wall.shape)
+    table.insert(objects.walls, wall)
+  end
 
   -- create a Balls
   objects.balls = {}
@@ -25,43 +34,7 @@ function tut_init()
     table.insert(objects.balls, ball)
   end
 
-  ---old static ball
-  --[[
-  objects.ball = {}
-  objects.ball.body = love.physics.newBody(world, WIDTH / 2 + 1, 50,
-    "dynamic")
-  objects.ball.shape = love.physics.newCircleShape(20)
-  objects.ball.fixture = love.physics.newFixture(objects.ball.body,
-    objects.ball.shape, 1)
-  objects.ball.fixture:setRestitution(0.9)
-  ]]
-  --- create 2 blocks
-  --[[
-  objects.block1 = {}
-  objects.block1.body = love.physics.newBody(world, 200, 550, "dynamic")
-  objects.block1.shape = love.physics.newRectangleShape(0, 0, 50, 100)
-  objects.block1.fixture = love.physics.newFixture(objects.block1.body,
-    objects.block1.shape, 5)
-
-  objects.block2 = {}
-  objects.block2.body = love.physics.newBody(world, 200, 400, "dynamic")
-  objects.block2.shape = love.physics.newRectangleShape(0, 0, 100, 50)
-  objects.block2.fixture = love.physics.newFixture(objects.block2.body,
-    objects.block2.shape, 5)
-  ]]
-
-  --- dead iteration of pins
-  --[[
-  objects.pins[x] = {}
-  objects.pins[x].body = love.physics.newBody(world, (WIDTH / 6) * x,
-  HEIGHT - HEIGHT / 3)
-  objects.pins[x].shape = love.physics.newCircleShape(20)
-  objects.pins[x].fixture = love.physics.newFixture(objects.pins[x].body,
-    objects.pins[x].shape)
-  ]]
-
   objects.pins = {}
-
 
   -- the math needs to be fixed here, buggy method to do offsets
   for x = 1, pinCols, 1 do
@@ -78,15 +51,6 @@ function tut_init()
     end
   end
 
-  --[[
-  objects.pin1 = {}
-  objects.pin1.body = love.physics.newBody(world, WIDTH / 2 + 1,
-    HEIGHT - HEIGHT / 3)
-  objects.pin1.shape = love.physics.newCircleShape(20)
-  objects.pin1.fixture = love.physics.newFixture(objects.pin1.body,
-    objects.pin1.shape)
-  ]]
-
   return world, objects
 end
 
@@ -99,20 +63,14 @@ end
 
 function tut_draw()
   lgsetcol(0.28, 0.63, 0.05)
-  love.graphics.polygon("fill",
-    objects.ground.body:getWorldPoints(objects.ground.shape:getPoints()))
+  for k, v in pairs(objects.walls) do
+    love.graphics.polygon("fill", v.body:getWorldPoints(v.shape:getPoints()))
+  end
 
   lgsetcol(0.76, 0.18, 0.05)
   for k, v in pairs(objects.balls) do
     love.graphics.circle("fill", v.body:getX(), v.body:getY(), v.shape:getRadius())
   end
---[[
-  lgsetcol(0.20, 0.20, 0.20)
-  love.graphics.polygon("fill", objects.block1.body:getWorldPoints(
-    objects.block1.shape:getPoints()))
-  love.graphics.polygon("fill", objects.block2.body:getWorldPoints(
-    objects.block2.shape:getPoints()))
-  ]]
 
   lgsetcol(0.4, 0.4, 0.4)
   for k, v in pairs(objects.pins) do
