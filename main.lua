@@ -8,6 +8,7 @@ function love.load()
 
 	WIDTH    = love.graphics.getWidth()
 	HEIGHT   = love.graphics.getHeight()
+	
 
 	MX = 0
 	MY = 0

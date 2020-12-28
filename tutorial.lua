@@ -30,7 +30,7 @@ function tut_init()
     ball.body = love.physics.newBody(world, x, 5, 'dynamic')
     ball.shape = love.physics.newCircleShape(20)
     ball.fixture = love.physics.newFixture(ball.body, ball.shape, 1)
-    ball.fixture:setRestitution(0.5)
+    ball.fixture:setRestitution(0.25)
     table.insert(objects.balls, ball)
   end
 

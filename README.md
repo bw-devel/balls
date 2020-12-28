@@ -25,6 +25,8 @@ multiple tables?
 
 * [Wikipedia - Pachinko](https://en.wikipedia.org/wiki/Pachinko)
 * [Steam Store - Pincremental](https://store.steampowered.com/app/1369470/Pincremental/)
+* [Youtube - Japan's Biggest Gaming Obsession Explained | Pachinko](https://www.youtube.com/watch?v=-tBy2jemw4s)
+* [Youtube - Japanese PACHINKO MACHINE played by Todd Tuckey from TNT Amusements - WHY BOTHER???](https://www.youtube.com/watch?v=BT-PWC8_h4M)
 
 
 ## Resources
