@@ -19,6 +19,9 @@ function love.load()
 
 
 	--[[ Physics: Tutorial https://love2d.org/wiki/Tutorial:Physics]]
+
+	pinRows = 4
+	pinCols = 7
 	world, objects = tut_init()
 end
 
@@ -51,6 +54,7 @@ function love.keyreleased(k)
 	if k == 'q' then love.event.quit() end
 	if k == 'p' then DEBUG = not DEBUG end
 	if k == 'space' then PAUSED = not PAUSED end
+	if k == 'r' then 	world, objects = tut_init() end
 end
 
 function love.mousepressed(x, y, button, isTouch)

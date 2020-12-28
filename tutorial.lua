@@ -14,7 +14,7 @@ function tut_init()
 
   -- create a ball
   objects.ball = {}
-  objects.ball.body = love.physics.newBody(world, WIDTH / 2, 50,
+  objects.ball.body = love.physics.newBody(world, WIDTH / 2 + 1, 50,
     "dynamic")
   objects.ball.shape = love.physics.newCircleShape(20)
   objects.ball.fixture = love.physics.newFixture(objects.ball.body,
@@ -22,6 +22,7 @@ function tut_init()
   objects.ball.fixture:setRestitution(0.9)
 
   --- create 2 blocks
+  --[[
   objects.block1 = {}
   objects.block1.body = love.physics.newBody(world, 200, 550, "dynamic")
   objects.block1.shape = love.physics.newRectangleShape(0, 0, 50, 100)
@@ -33,13 +34,44 @@ function tut_init()
   objects.block2.shape = love.physics.newRectangleShape(0, 0, 100, 50)
   objects.block2.fixture = love.physics.newFixture(objects.block2.body,
     objects.block2.shape, 5)
+  ]]
 
+  --- dead iteration of pins
+  --[[
+  objects.pins[x] = {}
+  objects.pins[x].body = love.physics.newBody(world, (WIDTH / 6) * x,
+  HEIGHT - HEIGHT / 3)
+  objects.pins[x].shape = love.physics.newCircleShape(20)
+  objects.pins[x].fixture = love.physics.newFixture(objects.pins[x].body,
+    objects.pins[x].shape)
+  ]]
+
+  objects.pins = {}
+
+
+  -- the math needs to be fixed here, buggy method to do offsets
+  for x = 1, pinCols, 1 do
+    for y = 1, pinRows, 1 do
+      local ox = y % 2 * WIDTH / 12
+      local pin = {}
+      if x == pinCols and y % 2 == 1 then goto continue end
+      pin.body = love.physics.newBody(world, (WIDTH / (pinCols + 1)) * x + ox,
+      HEIGHT - (HEIGHT / (pinRows + 1)) * y)
+      pin.shape = love.physics.newCircleShape(20)
+      pin.fixture = love.physics.newFixture(pin.body, pin.shape)
+      table.insert(objects.pins, pin)
+      ::continue::
+    end
+  end
+
+  --[[
   objects.pin1 = {}
   objects.pin1.body = love.physics.newBody(world, WIDTH / 2 + 1,
     HEIGHT - HEIGHT / 3)
   objects.pin1.shape = love.physics.newCircleShape(20)
   objects.pin1.fixture = love.physics.newFixture(objects.pin1.body,
     objects.pin1.shape)
+  ]]
 
   return world, objects
 end
@@ -60,15 +92,17 @@ function tut_draw()
   love.graphics.circle("fill",objects.ball.body:getX(),
     objects.ball.body:getY(), objects.ball.shape:getRadius())
 
+--[[
   lgsetcol(0.20, 0.20, 0.20)
   love.graphics.polygon("fill", objects.block1.body:getWorldPoints(
     objects.block1.shape:getPoints()))
   love.graphics.polygon("fill", objects.block2.body:getWorldPoints(
     objects.block2.shape:getPoints()))
+  ]]
 
   lgsetcol(0.4, 0.4, 0.4)
-  love.graphics.circle("fill", objects.pin1.body:getX(),
-    objects.pin1.body:getY(), objects.pin1.shape:getRadius())
-
+  for k, v in pairs(objects.pins) do
+    love.graphics.circle("fill", v.body:getX(), v.body:getY(), v.shape:getRadius())
+  end
 
 end

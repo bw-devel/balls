@@ -19,7 +19,7 @@ Text
 | p           | toggles the debug overlay |
 | space       | pause/un-pause simulation |
 | q           | quits game                |
-| ...         | ...                       |
+| r           | reset objects             |
 
 
 ### Reference ###
