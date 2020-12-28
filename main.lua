@@ -1,5 +1,6 @@
 require('./helpers')
 require('./debug')
+require('./tutorial')
 
 function love.load()
 	DEBUG    = debug_init()
@@ -15,6 +16,10 @@ function love.load()
 	love.graphics.setFont(font)
 
 	lgsetbgcol(0.13, 0.15, 0.17, 1.0)
+
+
+	--[[ Physics: Tutorial https://love2d.org/wiki/Tutorial:Physics]]
+	world, objects = tut_init()
 end
 
 
@@ -25,12 +30,14 @@ function love.update(dt)
 	MX = love.mouse.getX()
 	MY = love.mouse.getY()
 
+	tut_update(dt)
 	if DEBUG then debug_update(dt) end
 end
 
 
 function love.draw()
 	if DEBUG then debug_draw() end
+	tut_draw()
 	overlay_draw()
 end
 
