@@ -29,6 +29,11 @@ function debug_print()
   txt = txt .. "Desktop Res: " .. tostring(w) .. " x " .. tostring(h) .."\n"
   txt = txt .. "timer: " .. tostring(timer) .. "\n"
   txt = txt .. "Paused: " .. tostring(PAUSED) .. "\n"
+
+  for i=1, #text, 1 do
+    txt = txt .. text[i]
+  end
+  --txt = txt .. text
   local x = 10
   local y = 10
   lgsetcol(0.75, 0.75, 0.75 ,1.0)

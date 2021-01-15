@@ -8,7 +8,7 @@ function love.load()
 
 	WIDTH    = love.graphics.getWidth()
 	HEIGHT   = love.graphics.getHeight()
-	
+
 
 	MX = 0
 	MY = 0
@@ -21,10 +21,11 @@ function love.load()
 
 	--[[ Physics: Tutorial https://love2d.org/wiki/Tutorial:Physics]]
 
-	pinRows = 7
-	pinCols = 7
-	pinRad = 20
+	pinRows = 12
+	pinCols = 12
+	pinRad = 5
 	world, objects = tut_init()
+	text={}
 end
 
 
@@ -35,15 +36,22 @@ function love.update(dt)
 	MX = love.mouse.getX()
 	MY = love.mouse.getY()
 
+	--if string.len(text) > 700 then text = '' end
+	if #text > 8 then
+		for i = #text, 8, -1 do
+			table.remove(text, i)
+		end
+	end
+
 	tut_update(dt)
 	if DEBUG then debug_update(dt) end
 end
 
 
 function love.draw()
-	if DEBUG then debug_draw() end
 	tut_draw()
 	overlay_draw()
+	if DEBUG then debug_draw() end
 end
 
 

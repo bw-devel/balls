@@ -21,7 +21,7 @@ multiple tables?
 | r           | reset objects             |
 
 ## Diagrams
-![Diagram 1]("documents/mechanical_ball_flow.png")
+![Diagram 1](documents/mechanical_ball_flow.png)
 
 
 ## Reference
